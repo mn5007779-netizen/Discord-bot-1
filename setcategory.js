@@ -3,16 +3,16 @@ const {owners } = require(`${process.cwd()}/config`);
 const db = require(`pro.db`)
 
 module.exports = {
-    name: "ticlog",
+    name: "setcategory",
     description: "A simple ping command.",
     run: async (Client, Message) => {
         if (Message.author.bot) return;
         if(!owners.includes(Message.author.id)) return Message.react('❌');
         if (!Message.guild) return;
-        const Channel = Message.mentions.channels.first() || Message.content.split(` `)[1];
-        if (!Channel) return Message.reply({ content: `**يرجى ارفاق منشن الشات او الايدي .**` })
+        const Cat = Message.content.split(` `)[1];
+        if (!Cat) return Message.reply({ content: `**يرجى ارفاق ايدي الكاتيغوري .**` })
         Message.react("✅").then(() => {
-          db.set(`Channel = [${Message.guild.id}]`, Channel)
+          db.set(`Cat = [${Message.guild.id}]`, Cat)
         })
     }
 }
